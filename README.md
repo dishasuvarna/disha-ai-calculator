@@ -27,7 +27,7 @@ Solve 2x + 5 = 15
 Square root of 1024
 I bought 3 items at 299 each with 10% discount. What is the total?
 
-## Tech Stack
+##  Tech Stack
 - HTML, CSS, JavaScript
 - Node.js
 - Express.js
