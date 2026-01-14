@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DISHA CALCULATOR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      width: 380px;
+      box-shadow: 0 0 10px #000;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>DISHA CALCULATOR</h2>
+    <input
+      id="query"
+      placeholder="Ask any calculation: arithmetic, algebra, percentages, powers, roots, word problems"
+    />
+    <button onclick="calculate()">DISHA AI</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    async function calculate() {
+      const query = document.getElementById("query").value;
+      const resultDiv = document.getElementById("result");
+
+      if (!query) {
+        resultDiv.innerText = "Please enter a calculation";
+        return;
+      }
+
+      resultDiv.innerText = "DISHA AI is thinking...";
+
+      try {
+        const response = await fetch("http://localhost:3000/calculate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ query })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          resultDiv.innerText = data.error;
+          return;
+        }
+
+        resultDiv.innerText = data.result;
+      } catch (err) {
+        resultDiv.innerText = "Server not running. Please start the backend.";
+      }
+    }
+  </script>
+</body>
+</html>
