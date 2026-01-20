@@ -25,13 +25,14 @@
       max-width: 520px;
       background: linear-gradient(
         180deg,
-        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.035),
         rgba(255,255,255,0.01)
       );
       border-radius: 18px;
       padding: 26px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.65);
       animation: fadeIn 0.6s ease;
+      backdrop-filter: blur(8px);
     }
 
     @keyframes fadeIn {
@@ -57,11 +58,13 @@
       background: linear-gradient(135deg, #2dd4bf, #60a5fa);
       color: #022;
       font-size: 18px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
     }
 
     h1 {
       margin: 0;
       font-size: 20px;
+      letter-spacing: 0.3px;
     }
 
     .subtitle {
@@ -79,6 +82,12 @@
       outline: none;
       background: #0b1220;
       color: #eaf6ff;
+      transition: box-shadow 0.25s ease, transform 0.15s ease;
+    }
+
+    input:focus {
+      box-shadow: 0 0 0 2px rgba(96,165,250,0.35);
+      transform: translateY(-1px);
     }
 
     input::placeholder {
@@ -91,24 +100,28 @@
       margin-top: 14px;
     }
 
-    button.primary {
-      flex: 1;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #34d399, #3b82f6);
-      color: #022;
+    button {
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
     }
 
     button.secondary {
-      padding: 12px;
+      padding: 12px 18px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.08);
       background: transparent;
       color: #9fb3c8;
       cursor: pointer;
+      font-weight: 500;
+    }
+
+    button.secondary:hover {
+      background: rgba(255,255,255,0.04);
+      color: #e6eef3;
     }
 
     .output {
@@ -145,7 +158,6 @@
     />
 
     <div class="controls">
-      <button class="primary" onclick="calculate()">DISHA AI</button>
       <button class="secondary" onclick="clearAll()">Clear</button>
       <button class="secondary" onclick="demo()">Demo</button>
     </div>
@@ -176,7 +188,6 @@ async function calculate() {
 
   output.innerText = '…';
 
-  // Try backend first (optional)
   try {
     const res = await fetch('http://localhost:3000/calculate', {
       method: 'POST',
@@ -193,7 +204,6 @@ async function calculate() {
     }
   } catch {}
 
-  // Always-working local fallback
   try {
     const safe = q
       .replace(/√/g, 'Math.sqrt')
