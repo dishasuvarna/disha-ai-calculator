@@ -1,7 +1,7 @@
 {
   "name": "ai-claculator",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple AI-powered calculator project.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,5 +16,13 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "node-fetch": "^2.7.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dishasuvarna/disha-ai-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dishasuvarna/disha-ai-calculator/issues"
+  },
+  "homepage": "https://github.com/dishasuvarna/disha-ai-calculator#readme"
 }
